@@ -37,7 +37,7 @@ services:
   # Contenedor C.
   scraper:
     container_name: scraper
-    build: './scraper/'
+    build: './contenedor-c/'
     env_file:
       - '.env'
     depends_on:

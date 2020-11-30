@@ -4,7 +4,7 @@ const MONGO_USERNAME	= process.env.MONGO_USERNAME;
 const MONGO_PASSWORD	= process.env.MONGO_PASSWORD;
 const MONGO_HOSTNAME	= process.env.MONGO_HOSTNAME;
 const MONGO_PORT		= process.env.MONGO_PORT;
-const MONGO_DATABASE	= process.env.MONGO_DATABASE;
+const MONGO_DATABASE	= process.env.MONGO_DB;
 
 class ISave {
 	constructor() { }
@@ -20,7 +20,7 @@ class MongoDB extends ISave {
 
 		// connect to Mongo DB
 		this.client = new mongo.MongoClient(
-			`mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/`,
+			`mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/`,
 			{
 				useNewUrlParser: true,
 				useUnifiedTopology: true
