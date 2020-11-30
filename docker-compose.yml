@@ -40,7 +40,7 @@ services:
     image: nodejs:latest
     restart: unless-stopped
     build:
-      context: ./Contenedor D/.
+      context: ./contenedor-d/.
       dockerfile: Dockerfile
     env_file: .env
     environment:
