@@ -34,3 +34,11 @@ services:
       - 'mongo'
     depends_on:
       - 'mongo'
+  # Contenedor C.
+  scraper:
+    container_name: scraper
+    build: './scraper/'
+    env_file:
+      - '.env'
+    depends_on:
+      - 'mongo'
