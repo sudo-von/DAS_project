@@ -1,0 +1,23 @@
+{
+  "name": "scraper",
+  "version": "1.0.0",
+  "description": "Gets the data from VocaDB and saves to the mongo database.",
+  "main": "scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/developer-jesus-github/DAS_project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/developer-jesus-github/DAS_project/issues"
+  },
+  "homepage": "https://github.com/developer-jesus-github/DAS_project#readme",
+  "dependencies": {
+    "mongodb": "^3.6.3",
+    "node-fetch": "2.6.1"
+  }
+}
