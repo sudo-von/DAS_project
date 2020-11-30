@@ -7,8 +7,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
+import ChatIcon from '@material-ui/icons/Chat';
+import AlbumIcon from '@material-ui/icons/Album';
 /* React Router. */
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Link } from "react-router-dom";
 
   /* Custom css styles. */
 const styles = {
@@ -18,19 +20,21 @@ const styles = {
 
 export default function Sidenav(props){
     return(
-        <Router>
+        <BrowserRouter>
             <div style={{background: 'rgba(19,122,127,.1)', width: '100%', height: 150}}>
                 <img style={{width: 100, textAlign: 'left', float: 'left'}} src="https://i.pinimg.com/originals/85/b0/db/85b0db4f7ad7dce7ff28e14f7db75e17.png"/>
             </div>
             <Divider/>
-            <List>
-                <Link style={styles} to="/playlist">
-                    <ListItem button>
-                        <ListItemIcon><LibraryMusicIcon/></ListItemIcon>
-                        <ListItemText primary="Playlist"/>
-                    </ListItem>
-                </Link>
-            </List>
-        </Router>
+            <Switch>
+                <List>
+                    <Link style={styles} to="/playlist">
+                        <ListItem button>
+                            <ListItemIcon><LibraryMusicIcon/></ListItemIcon>
+                            <ListItemText primary="Playlist"/>
+                        </ListItem>
+                    </Link>
+                </List>
+            </Switch>
+        </BrowserRouter>
     );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+/* Material-ui components. */
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,6 +8,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import ChatIcon from '@material-ui/icons/Chat';
+import AlbumIcon from '@material-ui/icons/Album';
+/* React Router. */
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,15 +41,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CardSong(props){
-    const { name, picture, publishDate, duration } = props.data;
-    const { artists } = props.data.author;
-    const classes = useStyles();
+  console.log(props.data);
+  /* Destructuring props. */
+  const { id,name, picture, publishDate, duration } = props.data;
+  const { artists } = props.data.author;
+  /* Hooks. */
+  const classes = useStyles();
+  const history = useHistory();
+
   return (
     <div>
         <AppBar style={{background: 'transparent', boxShadow: '0 0 0 0 rgba(0,0,0,0)'}} position="static">
             <Toolbar style={{display: 'flex', justifyContent: 'center', padding: 5}}>
-                <Button style={{margin: 5, background: '#6ec4c0', color: 'white'}}>Comments</Button>
-                <Button style={{margin: 5, background: '#6ec4c0', color: 'white'}}>Lyrics</Button>
+                <Button onClick={() => history.push(`/comments/${id}`)} style={{margin: 5, background: '#6ec4c0', color: 'white'}}><ChatIcon style={{marginRight: 10}}/>Comments</Button>
+                <Button onClick={() => history.push(`/lyrics/${id}`)} style={{margin: 5, background: '#6ec4c0', color: 'white'}}><AlbumIcon style={{marginRight: 10}}/>Lyrics</Button>
             </Toolbar>
         </AppBar>
         <Card className={classes.root}>
@@ -68,7 +78,6 @@ export default function CardSong(props){
             component="img"
             className={classes.cover}
             src={picture}
-            title="Live from space album cover"
         />
         </Card>
     </div>
