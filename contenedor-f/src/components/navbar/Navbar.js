@@ -9,7 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -17,6 +17,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 /* Custom components. */
 import Sidenav from '../sidenav/Sidenav';
+/* React Router. */
+import { useHistory } from 'react-router-dom';
 
 /* Component styles. */
 const useStyles = makeStyles({
@@ -42,6 +44,7 @@ export default function Navbar(props){
   const { title } = props;
   /* Hooks. */
   const classes = useStyles();
+  const history = useHistory();
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -72,6 +75,15 @@ export default function Navbar(props){
         <IconButton onClick={toggleDrawer('left', true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
           <MenuIcon />
         </IconButton>
+        {props.back && 
+        <IconButton onClick={() => history.push({ pathname: `/playlist`, carouselId: props.back})} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+        <KeyboardBackspaceIcon/>
+      </IconButton> 
+        || props.back == 0 &&
+          <IconButton onClick={() => history.push({ pathname: `/playlist`, carouselId: props.back})} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <KeyboardBackspaceIcon/>
+          </IconButton> 
+        }
         <Typography variant="h6" className={classes.title}>
           {title}
         </Typography>

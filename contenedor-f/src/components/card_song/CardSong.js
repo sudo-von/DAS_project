@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CardSong(props){
-  console.log(props.data);
+  console.log(props.carouselId);
   /* Destructuring props. */
   const { id, name, url, picture, publishDate, duration } = props.data;
   const { artists } = props.data.author;
@@ -88,9 +88,9 @@ export default function CardSong(props){
     <div>
         <AppBar style={{background: 'transparent', boxShadow: '0 0 0 0 rgba(0,0,0,0)'}} position="static">
           <Toolbar style={{display: 'flex', justifyContent: 'center', padding: 5}}>
-            <Button onClick={() => history.push(`/comments/${id}`)} style={{margin: 5, background: '#6ec4c0', color: 'white'}}><ChatIcon style={{marginRight: 10}}/>Comments</Button>
+            <Button onClick={() => history.push({ pathname :`/comments/${id}`, carouselId: props.carouselId})} style={{margin: 5, background: '#6ec4c0', color: 'white'}}><ChatIcon style={{marginRight: 10}}/>Comments</Button>
             <Button onClick={handleOpen} style={{margin: 5, background: '#6ec4c0', color: 'white'}}><YouTubeIcon style={{marginRight: 10}}/>Video</Button>
-            <Button onClick={() => history.push(`/lyrics/${id}`)} style={{margin: 5, background: '#6ec4c0', color: 'white'}}><AlbumIcon style={{marginRight: 10}}/>Lyrics</Button>
+            <Button onClick={() => history.push({ pathname :`/lyrics/${id}`, carouselId: props.carouselId})} style={{margin: 5, background: '#6ec4c0', color: 'white'}}><AlbumIcon style={{marginRight: 10}}/>Lyrics</Button>
           </Toolbar>
         </AppBar>
         <Card className={classes.root}>

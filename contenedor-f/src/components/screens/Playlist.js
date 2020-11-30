@@ -13,6 +13,7 @@ export default class Playlist extends React.Component{
     this.state = {
       playlist: [],
       loading: true,
+      carouselId: props.location.carouselId,
     };
   }
 
@@ -51,7 +52,7 @@ export default class Playlist extends React.Component{
             this.state.loading &&
             <Loader></Loader>
           }
-          <CarouselCard playlist={this.state.playlist}></CarouselCard>
+          <CarouselCard carouselId={this.state.carouselId} playlist={this.state.playlist}></CarouselCard>
         </Grid>
       </div>
     );

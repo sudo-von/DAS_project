@@ -13,6 +13,7 @@ export default class Lyrics extends React.Component{
     this.state = {
       lyrics: null,
       loading: true,
+      id: this.props.location.carouselId,
     };
   }
 
@@ -45,7 +46,7 @@ export default class Lyrics extends React.Component{
   render(){
     return (
       <div>
-        <Navbar title="Lyrics"></Navbar>
+        <Navbar back={this.state.id} title="Lyrics"></Navbar>
           <Grid container direction="row" justify="center" alignItems="center">
             {
               this.state.loading &&

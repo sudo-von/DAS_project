@@ -6,7 +6,6 @@ import CardComment from '../card_comment/CardComment';
 /* Material-ui components. */
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-
 export default class Comments extends React.Component{
   /* State. */
   constructor(props) {
@@ -14,10 +13,12 @@ export default class Comments extends React.Component{
     this.state = {
       playlist: [],
       loading: true,
+      id: this.props.location.carouselId,
     };
   }
 
   async componentDidMount(){
+    console.log(this.state.id)
     await this.getPlaylist();
   }
 
@@ -47,18 +48,17 @@ export default class Comments extends React.Component{
   render(){
     return (
       <div>
-        <Navbar title="Comments"></Navbar>
+        <Navbar title="Comments" back={this.state.id}></Navbar>
         <Container maxWidth="md">
           <Grid container direction="row" justify="center" alignItems="center">
-            {
-              this.state.loading &&
+            {this.state.loading &&
               <Loader></Loader>
             }
-              {this.state.playlist.map((res, i) => (
-                <Grid item xs={12} sm={6} md={4}>
-                  <CardComment data={res}></CardComment>
-                </Grid>
-              ))}
+            {this.state.playlist.map((res, i) => (
+              <Grid item xs={12} sm={6} md={4}>
+                <CardComment data={res}></CardComment>
+              </Grid>
+            ))}
           </Grid>
         </Container>
       </div>
