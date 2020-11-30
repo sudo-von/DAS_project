@@ -13,7 +13,7 @@ services:
       MONGO_INITDB_HOSTNAME: ${MONGO_HOSTNAME}
       MONGO_INITDB_PORT: ${MONGO_PORT}
     volumes:
-      - ./mongo/mongo-volume:/data/db
+      - ./contenedor-a/mongo-volume:/data/db
     ports:
       - '27017:27017'
   # Contenedor B.
@@ -42,3 +42,33 @@ services:
       - '.env'
     depends_on:
       - 'mongo'
+  # Contenedor D.
+  nodeapi:
+    container_name: nodeapi
+    image: nodejs:latest
+    restart: unless-stopped
+    build:
+      context: ./contenedor-d/.
+      dockerfile: Dockerfile
+    env_file: .env
+    environment:
+      MONGO_USERNAME: ${MONGO_USERNAME}
+      MONGO_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_HOSTNAME: ${MONGO_HOSTNAME}
+      MONGO_PORT: ${MONGO_PORT}
+      MONGO_DB: ${MONGO_DB} 
+    ports:
+      - "1337:1337"
+    links:
+      - 'mongo'
+    depends_on:
+      - 'mongo'
+  # Contenedor F.
+  services:
+    container_name: apache
+    image: 'bitnami/apache:latest'
+    ports:
+      - '80:8080'
+      - '443:8443'
+    volumes:
+      - ./contenedor-f/build/:/app
