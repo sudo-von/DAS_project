@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-module.exports = async (url, params) => {
+module.exports = async (url, params = {}) => {
 	// convert params structure to query string
 	let query = "";
 	for(let p in params)
