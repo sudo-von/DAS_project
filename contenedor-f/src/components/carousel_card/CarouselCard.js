@@ -9,12 +9,7 @@ export default function CarouselCard(props){
     const { playlist, carouselId } = props;
 
     return (
-        <div
-            style={{
-                position: 'absolute', left: '50%', top: '50%',
-                transform: 'translate(-50%, -50%)'
-            }}
-            >
+        <div style={{position: 'absolute', left: '50%', top: '50%',transform: 'translate(-50%, -50%)'}}>
             <Carousel index={carouselId} autoPlay={false} animation={"slide"}  >
                 {playlist.map((data, i) => (
                     <CardSong key={i} data={data} carouselId={i}></CardSong>

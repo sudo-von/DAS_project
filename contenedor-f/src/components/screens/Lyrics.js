@@ -13,7 +13,8 @@ export default class Lyrics extends React.Component{
     this.state = {
       lyrics: null,
       loading: true,
-      id: this.props.location.carouselId,
+      id: this.props.location.id,
+      carouselId: this.props.location.carouselId,
     };
   }
 
@@ -23,7 +24,7 @@ export default class Lyrics extends React.Component{
 
   /* Fetch the lyrics and render them. */
   getLyrics = async () => {
-    const request = await fetch('https://vocadb.net/api/songs', 
+    const request = await fetch(`http://nodeapi:1337/songs/lyrics/${this.state.id}`, 
       {
         headers: {
           "Accept" : "application/json",
@@ -33,9 +34,8 @@ export default class Lyrics extends React.Component{
     const lyrics = await request.json();
     /* If there is data then render it. */
     if(lyrics){
-      let json = {"lang":"","value":"遠くで聞こえる\r\n確かに響く声は\r\n誰かの心を\r\n捉える枷になるよ\r\n\r\nああ　色褪せてく\r\n私一人きり　取り残すよ\r\n移り変わる景色も今は\r\nこの胸を引き裂く\r\n僕を追い越してくから\r\n\r\nああ　色褪せてく\r\n私一人きり　閉じこめるよ\r\n瞳が映していた過去は\r\n色付くこと無く\r\nどこかへと堕ちてくから\r\n\r\nああ　色褪せてく\r\n私一人きり　取り残すよ\r\n移り変わる景色も今は\r\nこの胸を引き裂く\r\n僕を追い越してくから","credits":{"source":"","url":"http://www.nicovideo.jp/watch/sm19600724"}};
       this.setState({
-        lyrics: json,
+        lyrics: lyrics['lyrics'],
         loading: false,
       });
     }else{
@@ -46,7 +46,7 @@ export default class Lyrics extends React.Component{
   render(){
     return (
       <div>
-        <Navbar back={this.state.id} title="Lyrics"></Navbar>
+        <Navbar back={this.state.carouselId} title="Lyrics"></Navbar>
           <Grid container direction="row" justify="center" alignItems="center">
             {
               this.state.loading &&
