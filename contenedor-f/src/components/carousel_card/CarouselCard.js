@@ -3,7 +3,6 @@ import React from 'react';
 import CardSong from '../card_song/CardSong';
 /* Material-ui components. */
 import Carousel from 'react-material-ui-carousel'
-import Box from "@material-ui/core/Box";
 
 export default function CarouselCard(props){
     /* Destructuring. */
