@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/developer-jesus-github/DAS_project#readme",
   "dependencies": {
+    "mongodb": "^3.6.3",
     "node-fetch": "2.6.1"
   }
 }
