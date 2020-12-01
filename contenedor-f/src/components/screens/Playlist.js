@@ -23,7 +23,7 @@ export default class Playlist extends React.Component{
 
   /* Fetch the playlist and render a carousel with songs. */
   getPlaylist = async () => {
-    const request = await fetch('http://nodeapi:1337/songs', 
+    const request = await fetch('http://localhost:1337/songs', 
       {
         headers: {
           "Accept" : "application/json",

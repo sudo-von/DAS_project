@@ -24,7 +24,7 @@ export default class Lyrics extends React.Component{
 
   /* Fetch the lyrics and render them. */
   getLyrics = async () => {
-    const request = await fetch(`http://nodeapi:1337/songs/lyrics/${this.state.id}`, 
+    const request = await fetch(`http://localhost:1337/songs/lyrics/${this.state.id}`, 
       {
         headers: {
           "Accept" : "application/json",

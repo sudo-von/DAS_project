@@ -25,7 +25,7 @@ export default class Comments extends React.Component{
 
   /* Fetch the comments list and render a carousel with comments. */
   getComments = async () => {
-    const request = await fetch(`http://nodeapi:1337/songs/${this.state.id}/comments`, 
+    const request = await fetch(`http://localhost:1337/songs/${this.state.id}/comments`, 
       {
         headers: {
           "Accept" : "application/json",
