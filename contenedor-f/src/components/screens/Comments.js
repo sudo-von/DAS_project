@@ -44,7 +44,6 @@ export default class Comments extends React.Component{
         ...this.state,
         loading: false,
       });
-      alert('There are no comments...');
     }
   }
 
