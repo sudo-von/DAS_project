@@ -38,6 +38,7 @@ services:
   scraper:
     container_name: scraper
     build: './contenedor-c/'
+    restart: 'on-failure:10'
     env_file:
       - '.env'
     depends_on:
