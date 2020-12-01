@@ -51,7 +51,12 @@ module.exports = function(app, database){
             "duration": req.body.duration,
             "url": req.body.url,
             "picture": req.body.picture,
-            "authorName": req.body.authorname
+            "type" : "",
+            "ranking": {"favorited" : 0, "score" : 0},
+            "author": {"name":req.body.authorname,"artists":""},
+            "comments" : [],
+            "lyrics" : "",
+            "rating" : {"favorites": 0, "likes": 0}
         };
         
         var answr = await db.insertSong(song);
