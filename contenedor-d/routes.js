@@ -1,5 +1,5 @@
 const config = require("./config.js");
-const amqplib = require("ampqlib");
+const amqplib = require("amqplib");
 
 module.exports = function(app, database){
     var db = new database()
