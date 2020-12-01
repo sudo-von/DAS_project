@@ -6,7 +6,7 @@ import CarouselCard from '../carousel_card/CarouselCard';
 /* Material-ui components. */
 import Grid from '@material-ui/core/Grid';
 
-export default class Playlist extends React.Component{
+export default class Highlighted extends React.Component{
   /* State. */
   constructor(props) {
     super(props);
@@ -18,12 +18,12 @@ export default class Playlist extends React.Component{
   }
 
   async componentDidMount(){
-    await this.getPlaylist();
+    await this.getHighlightedPlaylist();
   }
 
   /* Fetch the playlist and render a carousel with songs. */
-  getPlaylist = async () => {
-    const request = await fetch('http://localhost:1337/songs', 
+  getHighlightedPlaylist = async () => {
+    const request = await fetch('http://localhost:1337/songs/highlighted', 
       {
         headers: {
           "Accept" : "application/json",
@@ -39,14 +39,14 @@ export default class Playlist extends React.Component{
         loading: false,
       })
     }else{
-      alert('There are no songs...');
+      alert('There are no highlighted songs...');
     }
   }
 
   render(){
     return (
       <React.Fragment>
-        <Navbar title="Playlist"></Navbar>
+        <Navbar title="Highlighted songs"></Navbar>
         <Grid container direction="column" justify="center" alignItems="center">
           {
             this.state.loading &&
@@ -54,7 +54,7 @@ export default class Playlist extends React.Component{
           }
           <Grid style={{padding: 50, display: 'flex', justifyContent: 'center'}} item xs={12}>
             <Grid item xs={12} md={8}>
-              <CarouselCard route={'/playlist'} carouselId={this.state.carouselId} playlist={this.state.playlist}></CarouselCard>
+              <CarouselCard route={'/highlighted'} carouselId={this.state.carouselId} playlist={this.state.playlist}></CarouselCard>
             </Grid>
           </Grid>
         </Grid>

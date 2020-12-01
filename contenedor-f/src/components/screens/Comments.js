@@ -15,11 +15,11 @@ export default class Comments extends React.Component{
       loading: true,
       id: this.props.location.id,
       carouselId: this.props.location.carouselId,
+      route: this.props.location.route,
     };
   }
 
   async componentDidMount(){
-    console.log(this.state.id)
     await this.getComments();
   }
 
@@ -40,14 +40,18 @@ export default class Comments extends React.Component{
         loading: false,
       });
     }else{
+      this.setState({
+        ...this.state,
+        loading: false,
+      });
       alert('There are no comments...');
     }
   }
 
   render(){
     return (
-      <div>
-        <Navbar title="Comments" back={this.state.carouselId}></Navbar>
+      <React.Fragment>
+        <Navbar route={this.state.route} title="Comments" back={this.state.carouselId}></Navbar>
         <Container maxWidth="md">
           <Grid container direction="row" justify="center" alignItems="center">
             {this.state.loading &&
@@ -60,7 +64,7 @@ export default class Comments extends React.Component{
             ))}
           </Grid>
         </Container>
-      </div>
+      </React.Fragment>
     );
   }
 }
