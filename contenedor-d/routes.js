@@ -1,7 +1,9 @@
 const config = require("./config.js");
+const amqplib = require("ampqlib");
 
 module.exports = function(app, database){
     var db = new database()
+
 
     app.get('/', function (req, res) {
         res.send('DAS')
@@ -42,10 +44,16 @@ module.exports = function(app, database){
         res.send(comments);
     });
 
+
+    /// con rabbit
     app.post('/songs', async function(req, res){
+        const q = config.QUEUE;
+        const conn = await amqplib.connect(`amqp://${config.RABBITUSER}:${config.RABBITPASSWORD}@${RABBITHOST}:${RABBITPORT}`);
+        const ch = await conn.createChannel();
+        await ch.assertQueue(q);
+
         var id = await db.getLastId();
         const song = {
-            "id": id,
             "publishDate": req.body.content,
             "name": req.body.name,
             "duration": req.body.duration,
@@ -58,10 +66,32 @@ module.exports = function(app, database){
             "lyrics" : "",
             "rating" : {"favorites": 0, "likes": 0}
         };
-        
-        var answr = await db.insertSong(song);
-        res.send(answr);
+
+        const qm = JSON.stringify(song);
+        return ch.sendToQueue(q, Buffer.from(qm, 'utf8'));
     });
+
+    
+    // app.post('/songs', async function(req, res){
+    //     var id = await db.getLastId();
+    //     const song = {
+    //         "id": id,
+    //         "publishDate": req.body.content,
+    //         "name": req.body.name,
+    //         "duration": req.body.duration,
+    //         "url": req.body.url,
+    //         "picture": req.body.picture,
+    //         "type" : "",
+    //         "ranking": {"favorited" : 0, "score" : 0},
+    //         "author": {"name":req.body.authorname,"artists":""},
+    //         "comments" : [],
+    //         "lyrics" : "",
+    //         "rating" : {"favorites": 0, "likes": 0}
+    //     };
+        
+    //     var answr = await db.insertSong(song);
+    //     res.send(answr);
+    // });
 
     app.post('/songs/:id/comments', async function(req, res){
         var id = await db.getLastCommentId();
