@@ -23,7 +23,7 @@ export default class TopRated extends React.Component{
 
   /* Fetch the playlist and render a carousel with songs. */
   getHighlightedPlaylist = async () => {
-    const request = await fetch('http://localhost:1337/songs/highlighted', 
+    const request = await fetch('http://localhost:1337/songs/toprated', 
       {
         headers: {
           "Accept" : "application/json",
