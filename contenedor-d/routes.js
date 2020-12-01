@@ -22,21 +22,21 @@ module.exports = function(app, database){
     });
     
     app.get('/songs/:id/comments', async function (req, res) {
-        var comments = await db.getSongComments(req.params.id);
+        var comments = await db.getSongComments(req.params.id) || config.NOENCONTRADO;
         if (!comments)res.send(config.NOENCONTRADO);
 
         res.send(comments);
     });
 
     app.get('/songs/highlighted', async function (req, res) {
-        var comments = await db.getHighlightedSongs(req.params.id);
+        var comments = await db.getHighlightedSongs(req.params.id) || config.NOENCONTRADO;
         if (!comments)res.send(config.NOENCONTRADO);
 
         res.send(comments);
     });
 
     app.get('/songs/toprated', async function (req, res) {
-        var comments = await db.getTopRatedSongs(req.params.id);
+        var comments = await db.getTopRatedSongs(req.params.id) || config.NOENCONTRADO;
         if (!comments)res.send(config.NOENCONTRADO);
 
         res.send(comments);
@@ -46,12 +46,12 @@ module.exports = function(app, database){
         var id = await db.getLastId();
         const song = {
             "id": id,
-            "publishdate": req.body.content,
-            "duration": req.body.duration,
+            "publishDate": req.body.content,
             "name": req.body.name,
+            "duration": req.body.duration,
             "url": req.body.url,
             "picture": req.body.picture,
-            "authorname": req.body.authorname
+            "authorName": req.body.authorname
         };
         
         var answr = await db.insertSong(song);
