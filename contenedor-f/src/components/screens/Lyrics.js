@@ -44,7 +44,6 @@ export default class Lyrics extends React.Component{
         ...this.state,
         loading: false,
       });
-      alert('There are no lyrics for this song...');
     }
   }
 
