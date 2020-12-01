@@ -17,15 +17,6 @@ import { useHistory } from 'react-router-dom';
 /* ReactPlayer. */
 import ReactPlayer from 'react-player'
 
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,70 +27,35 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  content: {
-    flex: '1 0 auto',
-  },
-  cover: {
-    width: 'auto',
-  },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
-  },
-  paper: {
-    position: 'absolute',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
 }));
 
 export default function CardSong(props){
-  console.log(props.carouselId);
   /* Destructuring props. */
+  const { route } = props;
   const { id, name, url, picture, publishDate, duration } = props.data;
   const { artists } = props.data.author;
   /* Hooks. */
   const classes = useStyles();
   const history = useHistory();
-  /* getModalStyle is not a pure function, we roll the style only on the first render */
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <CardContent className={classes.content}>
-          <ReactPlayer url={url}/>
-      </CardContent>
-    </div>
-  );
 
   return (
-    <div>
+    <React.Fragment>
         <AppBar style={{background: 'transparent', boxShadow: '0 0 0 0 rgba(0,0,0,0)'}} position="static">
           <Toolbar style={{display: 'flex', justifyContent: 'center', padding: 5}}>
-            <Button onClick={() => history.push({ pathname :`/comments/${id}`, carouselId: props.carouselId})} style={{margin: 5, background: '#6ec4c0', color: 'white'}}><ChatIcon style={{marginRight: 10}}/>Comments</Button>
-            <Button onClick={handleOpen} style={{margin: 5, background: '#6ec4c0', color: 'white'}}><YouTubeIcon style={{marginRight: 10}}/>Video</Button>
-            <Button onClick={() => history.push({ pathname :`/lyrics/${id}`, carouselId: props.carouselId})} style={{margin: 5, background: '#6ec4c0', color: 'white'}}><AlbumIcon style={{marginRight: 10}}/>Lyrics</Button>
+            <Button onClick={() => history.push({ route: route, pathname :`/comments/${id}`, id: id, carouselId: props.carouselId})} style={{margin: 5, background: '#6ec4c0', color: 'white'}}><ChatIcon style={{marginRight: 10}}/>Comments</Button>
+            <Button onClick={() => history.push({ route: route, pathname :`/lyrics/${id}`, id: id, carouselId: props.carouselId})} style={{margin: 5, background: '#6ec4c0', color: 'white'}}><AlbumIcon style={{marginRight: 10}}/>Lyrics</Button>
           </Toolbar>
         </AppBar>
         <Card className={classes.root}>
           <div className={classes.details}>
             <CardContent className={classes.content}>
-              <Typography component="h5" variant="h5">
-                  {name}
+              <Typography style={{display: 'flex', alignItems: 'center'}} component="h5" variant="h5">
+                  <img src={picture} style={{borderRadius: 100, height: 40, width: 45}}/>
+                  <span style={{marginLeft : 5, marginTop: 7}}>
+                    {name}
+                  </span>
               </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
+              <Typography style={{marginTop: 10}} variant="subtitle1" color="textSecondary">
                   {artists}
               </Typography>
               <Typography style={{fontSize: 12}} variant="subtitle1" color="textSecondary">
@@ -110,20 +66,8 @@ export default function CardSong(props){
               </Typography>
             </CardContent>
           </div>
-        <CardMedia
-          component="img"
-          className={classes.cover}
-          src={picture}
-        />
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-          {body}
-        </Modal>
+          <ReactPlayer url={url}/>
         </Card>
-    </div>
+    </React.Fragment>
   );
 }

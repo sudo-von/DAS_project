@@ -34,6 +34,15 @@ services:
       - 'mongo'
     depends_on:
       - 'mongo'
+  # Contenedor C.
+  scraper:
+    container_name: scraper
+    build: './contenedor-c/'
+    restart: 'on-failure:10'
+    env_file:
+      - '.env'
+    depends_on:
+      - 'mongo'
   # Contenedor D.
   nodeapi:
     container_name: nodeapi
