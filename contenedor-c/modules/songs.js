@@ -8,6 +8,14 @@ const getSongs = async (url, defv, params = {}) => {
 
 const getArtistSongs = async (url, artists, params) => {
 	let songs = [];
+
+	// Artists:
+	//45,		DECO*27
+	//23981,	Yunosuke
+	//885,		Kairiki bear
+	//24092,	KIRA
+	//10216,	DIVELA
+	//38		八王子P
 	
 	for(let a of artists) { // get each artist songs
 		songs = songs.concat((await getSongs(
@@ -30,7 +38,7 @@ const getData = (songs, type) => {
 
 	songs.forEach(s => {
 		let pv = s.pvs.find(p => p.service == "Youtube");
-		if(!pv) // service not found
+		if(!pv || !s.mainPicture) // service not found or reach the limit
 			return;
 
 		data.push({
@@ -57,26 +65,19 @@ const getData = (songs, type) => {
 
 module.exports = async () => {
 	// get normal songs
-	let songs = await getArtistSongs(
+	let songs = (await getSongs(
 		"https://vocadb.net/api/songs",
-		[
-			45,			// DECO*27
-			23981,		// Yunosuke
-			885,		// Kairiki bear
-			24092,		// KIRA
-			10216,		// DIVELA
-			38			// 八王子P
-		],
+		{ items: [] },
 		{
 			songTypes:		"Original",
-			includeMembers: true,
 			onlyWithPvs:	true,
 			pvServices:		"Youtube",
-			maxResults:		4,
-			sort:			"PublishDate",
+			start:			20,
+			maxResults:		20,
+			sort:			"FavoritedTimes",
 			fields:			"PVs,MainPicture"
 		}
-	);
+	)).items;
 
 	// get highlighted songs
 	let highlighteds = await getSongs(
@@ -92,7 +93,7 @@ module.exports = async () => {
 		"https://vocadb.net/api/songs/top-rated",
 		[],
 		{
-			maxResults: 12,
+			maxResults: 10,
 			fields: "PVs,MainPicture"
 		}
 	);
@@ -101,5 +102,4 @@ module.exports = async () => {
 	return getData(songs, "Normal")
 		.concat(getData(highlighteds, "Highlighted"))
 		.concat(getData(topRated, "TopRated"));
-
 }
