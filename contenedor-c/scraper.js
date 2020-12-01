@@ -12,14 +12,14 @@ const getRatings	= require("./modules/ratings");
 	if (exist) return;
 
 	var songs = await getSongs(); // get songs
-	songs.forEach(async s => {
+	songs.forEach(async (s, k) => {
 		// get individual data
 		s.comments	= await getComments(s.id);
 		s.lyrics	= await getLyrics(s.id);
 		s.ratings	= await getRatings(s.id);
 
-		// remove API id
-		delete s.id;
+		// overwrite id
+		s.id = k.toString();
 
 		// insert into DB
 		let db = new MongoDB();
