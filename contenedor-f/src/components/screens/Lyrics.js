@@ -15,6 +15,7 @@ export default class Lyrics extends React.Component{
       loading: true,
       id: this.props.location.id,
       carouselId: this.props.location.carouselId,
+      route: this.props.location.route,
     };
   }
 
@@ -33,20 +34,24 @@ export default class Lyrics extends React.Component{
     );
     const lyrics = await request.json();
     /* If there is data then render it. */
-    if(lyrics){
+    if(lyrics['lyrics']){
       this.setState({
         lyrics: lyrics['lyrics'],
         loading: false,
       });
     }else{
-      alert('There are no lyrics...');
+      this.setState({
+        ...this.state,
+        loading: false,
+      });
+      alert('There are no lyrics for this song...');
     }
   }
 
   render(){
     return (
-      <div>
-        <Navbar back={this.state.carouselId} title="Lyrics"></Navbar>
+      <React.Fragment>
+        <Navbar route={this.state.route} back={this.state.carouselId} title="Lyrics"></Navbar>
           <Grid container direction="row" justify="center" alignItems="center">
             {
               this.state.loading &&
@@ -59,7 +64,7 @@ export default class Lyrics extends React.Component{
               </Grid>
             }
           </Grid>
-      </div>
+      </React.Fragment>
     );
   }
 }
