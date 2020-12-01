@@ -1,0 +1,14 @@
+const routes = require('./routes.js');
+const mongo = require('./mongo.js').mongo;
+////////
+
+const PORT = process.env.PORT || 1338;
+
+module.exports = {
+
+    PORT: PORT,
+    ROUTES: routes,
+    NOENCONTRADO: "404",
+    mongo: mongo
+    // rabbit: rabbit
+}

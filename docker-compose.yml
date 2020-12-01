@@ -64,8 +64,20 @@ services:
       - 'mongo'
     depends_on:
       - 'mongo'
+  # Contenedor E.
+  rabbitmq:
+    container_name: rabbitmq
+    image: "rabbitmq:3-management"
+    env_file:
+      - '.env'
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    ports:
+      - '5672:5672'
+      - '15672:15672'
   # Contenedor F.
-  services:
+  apache:
     container_name: apache
     image: 'bitnami/apache:latest'
     ports:
@@ -73,3 +85,20 @@ services:
       - '443:8443'
     volumes:
       - ./contenedor-f/build/:/app
+  # Contenedor G.
+  noderabbit:
+    container_name: noderabbit
+    image: nodejs:latest
+    restart: unless-stopped
+    build:
+      context: ./contenedor-g/.
+      dockerfile: Dockerfile
+    env_file: .env
+    environment:
+      MONGO_USERNAME: ${MONGO_USERNAME}
+      MONGO_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_HOSTNAME: ${MONGO_HOSTNAME}
+      MONGO_PORT: ${MONGO_PORT}
+      MONGO_DB: ${MONGO_DB} 
+    links:
+      - 'mongo'
