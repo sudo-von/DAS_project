@@ -24,8 +24,8 @@ export default class AddSong extends React.Component{
             authorName : null,
             songName : null,
             duration : null,
-            youtubeUrl : null,
-            pictureUrl : null,
+            youtubeUrl : "https://www.youtube.com/watch?v=BEEFXAltoqo",
+            pictureUrl : "https://owldb.net/wp-content/uploads/2019/06/Eve-%E2%80%93-Yamiyo-300x300.jpg",
         };
     }
  
@@ -65,8 +65,8 @@ export default class AddSong extends React.Component{
         authorName : null,
         songName : null,
         duration : null,
-        youtubeUrl : null,
-        pictureUrl : null,
+        youtubeUrl : "https://www.youtube.com/watch?v=BEEFXAltoqo",
+        pictureUrl : "https://owldb.net/wp-content/uploads/2019/06/Eve-%E2%80%93-Yamiyo-300x300.jpg",
     });
     }
 

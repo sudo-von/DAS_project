@@ -87,7 +87,7 @@ services:
       - ./contenedor-f/build/:/app
     links:
       - 'nodeapi'
-    # Contenedor G.
+  # Contenedor G.
     #noderabbit:
     #  container_name: noderabbit
     #  image: nodejs:latest

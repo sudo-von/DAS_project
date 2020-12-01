@@ -34,7 +34,7 @@ export default class Lyrics extends React.Component{
     );
     const lyrics = await request.json();
     /* If there is data then render it. */
-    if(lyrics['lyrics']){
+    if(lyrics['lyrics'] != ''){
       this.setState({
         lyrics: lyrics['lyrics'],
         loading: false,

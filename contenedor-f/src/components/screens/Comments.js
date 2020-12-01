@@ -34,7 +34,7 @@ export default class Comments extends React.Component{
     );
     const comments = await request.json();
     /* If there is data then render it. */
-    if(comments){
+    if(comments['comments'] != ""){
       this.setState({
         comments: comments['comments'],
         loading: false,
