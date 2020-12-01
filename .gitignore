@@ -1,4 +1,14 @@
 contenedor-a/mongo-volume/*
+contenedor-g/rabbitmq/data/*
+contenedor-g/rabbitmq/etc/*
+contenedor-g/rabbitmq/logs/*
+
 node_modules/
 !contenedor-a/mongo-volume/.gitkeep 
 !contenedor-a/.gitkeep 
+
+!contenedor-g/.gitkeep 
+!contenedor-g/rabbitmq/.gitkeep 
+!contenedor-g/rabbitmq/data/.gitkeep 
+!contenedor-g/rabbitmq/etc/.gitkeep 
+!contenedor-g/rabbitmq/logs/.gitkeep 
