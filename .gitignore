@@ -1,3 +1,2 @@
-/contenedor-a/mongo-volume/
-/mongo/mongo-volume
+contenedor-a/mongo-volume/*
 node_modules/
