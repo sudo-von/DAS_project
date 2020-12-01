@@ -20,6 +20,14 @@ class IDatabase{
         getTopRatedSongs(){
             throw new Error("Method getTopRatedSongs needs to be implemented");
         };
+
+        insertSong(song){
+            throw new Error("Method insertSong needs to be implemented");
+        };
+        
+        insertSongComment(comment){
+            throw new Error("Method inserComment needs to be implemented");
+        };
 };
 
 module.exports = { IDatabase }
