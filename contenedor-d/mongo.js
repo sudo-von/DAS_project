@@ -25,13 +25,11 @@ class mongo extends interfce{
     };
 
     async getSongLyrics(idGiven){
-        idGiven = parseInt(idGiven, 10);
-        return await this.collection.findOne({id: idGiven}, {projection: {lyrics: 1, _id: 0}});
+        return await this.collection.findOne({id: idGiven},{"lyrics": 1});
     };
 
     async getSongComments(idGiven){
-        idGiven = parseInt(idGiven, 10);
-        return await this.collection.findOne({id: idGiven}, {projection: {comments: 1, _id: 0}});
+        return await this.collection.findOne({id: idGiven},{"comments": 1});
     };
 
     async getHighlightedSongs(){
