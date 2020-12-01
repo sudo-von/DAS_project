@@ -44,7 +44,7 @@ module.exports = function(app, database){
 
     app.post('/songs', async function(req, res){
         var id = await db.getLastId();
-        const comment = {
+        const song = {
             "id": id,
             "publishdate": req.body.content,
             "duration": req.body.duration,
