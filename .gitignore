@@ -1,2 +1,4 @@
 contenedor-a/mongo-volume/*
 node_modules/
+!contenedor-a/mongo-volume/.gitkeep 
+!contenedor-a/.gitkeep 
