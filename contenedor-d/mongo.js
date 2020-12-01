@@ -85,7 +85,7 @@ class mongo extends interfce{
         return await this.collection.countDocuments();
     }
 
-    asyng getLastCommentId(idGiven){
+    async getLastCommentId(idGiven){
 
         idGiven = parseInt(idGiven, 10);
 
