@@ -6,13 +6,20 @@ const getRatings	= require("./modules/ratings");
 
 // init scrapper
 (async () => {
-	var songs = await getSongs(); // get songs
+	// check if needs to insert
+	var db = new MongoDB();
+	var exist = await db.existCollection();
+	if (exist) return;
 
-	songs.forEach(async s => {
+	var songs = await getSongs(); // get songs
+	songs.forEach(async (s, k) => {
 		// get individual data
 		s.comments	= await getComments(s.id);
 		s.lyrics	= await getLyrics(s.id);
 		s.ratings	= await getRatings(s.id);
+
+		// overwrite id
+		s.id = k.toString();
 
 		// insert into DB
 		let db = new MongoDB();

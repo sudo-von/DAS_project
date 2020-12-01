@@ -41,7 +41,7 @@ const useStyles = makeStyles({
 
 export default function Navbar(props){
   /* Destructuring props. */
-  const { title } = props;
+  const { title, route } = props;
   /* Hooks. */
   const classes = useStyles();
   const history = useHistory();
@@ -76,11 +76,11 @@ export default function Navbar(props){
           <MenuIcon />
         </IconButton>
         {props.back && 
-        <IconButton onClick={() => history.push({ pathname: `/playlist`, carouselId: props.back})} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+        <IconButton onClick={() => history.push({ pathname: route, carouselId: props.back})} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
         <KeyboardBackspaceIcon/>
       </IconButton> 
         || props.back == 0 &&
-          <IconButton onClick={() => history.push({ pathname: `/playlist`, carouselId: props.back})} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton onClick={() => history.push({ pathname: route, carouselId: props.back})} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <KeyboardBackspaceIcon/>
           </IconButton> 
         }

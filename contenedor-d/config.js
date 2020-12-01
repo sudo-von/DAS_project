@@ -2,7 +2,7 @@ const routes = require('./routes.js');
 const mongo = require('./mongo.js').mongo;
 ////////
 
-var PORT = process.env.PORT || 1337;
+const PORT = process.env.PORT || 1337;
 
 module.exports = {
 

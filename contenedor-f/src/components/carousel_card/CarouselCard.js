@@ -6,15 +6,13 @@ import Carousel from 'react-material-ui-carousel'
 
 export default function CarouselCard(props){
     /* Destructuring. */
-    const { playlist, carouselId } = props;
+    const { playlist, carouselId, route } = props;
 
     return (
-        <div style={{position: 'absolute', left: '50%', top: '50%',transform: 'translate(-50%, -50%)'}}>
-            <Carousel index={carouselId} autoPlay={false} animation={"slide"}  >
-                {playlist.map((data, i) => (
-                    <CardSong key={i} data={data} carouselId={i}></CardSong>
-                ))}
-            </Carousel>
-        </div>
+        <Carousel style={{display: 'flex', justifyContent: 'center'}} index={carouselId} autoPlay={false} animation={"slide"}  >
+            {playlist.map((data, i) => (
+                <CardSong route={route} key={i} data={data} carouselId={i}></CardSong>
+            ))}
+        </Carousel>
     );
 }

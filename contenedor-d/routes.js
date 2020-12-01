@@ -41,4 +41,33 @@ module.exports = function(app, database){
 
         res.send(comments);
     });
+
+    app.post('/songs', async function(req, res){
+        var id = await db.getLastId();
+        const song = {
+            "id": id,
+            "publishdate": req.body.content,
+            "duration": req.body.duration,
+            "name": req.body.name,
+            "url": req.body.url,
+            "picture": req.body.picture,
+            "authorname": req.body.authorname
+        };
+        
+        var answr = await db.insertSong(song);
+        res.send(answr);
+    });
+
+    app.post('/songs/:id/comments', async function(req, res){
+        var id = await db.getLastCommentId();
+        
+        const comment = {
+            "id": id,
+            "content": req.body.content
+        };
+        
+        var answr = await db.insertComment(comment);
+        res.send(answr);
+    });
+
 }

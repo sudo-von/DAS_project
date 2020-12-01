@@ -32,14 +32,79 @@ class mongo extends interfce{
     async getSongComments(idGiven){
         idGiven = parseInt(idGiven, 10);
         return await this.collection.findOne({id: idGiven}, {projection: {comments: 1, _id: 0}});
-    }
+    };
 
     async getHighlightedSongs(){
         return await this.collection.find({type: "Highlighted"}).toArray();
-    }
+    };
 
     async getTopRatedSongs(){
         return await this.collection.find({type: "TopRated"}).toArray();
+    };
+
+    async insertSong(song){
+        const returnedObject = { message: "The song has been successfully stored" }
+
+        try {
+            await this.collection.insertOne(song);
+        } catch(error){
+            returnedObject.message = "Something went wrong"
+            
+            return returnedObject
+        }
+
+       return returnedObject
+    };
+
+    async insertSongComment(idGiven, comment){
+        const returnedObject = { message: "The song has been successfully stored" }
+
+        idGiven = parseInt(idGiven, 10);
+
+
+
+        const filter = { id: idGiven };
+        const querySpecs = { 
+                                $push: {
+                                    "comments": {id: comment.id , content: comment.content}
+                                }
+                            };
+        
+        try {
+            await this.collection.updateOne(filter, querySpecs);
+        } catch(error){
+            returnedObject.message = "Something went wrong";
+
+            return returnedObject;
+        }
+
+       return returnedObject;
+    }
+
+    async getLastId(){
+        return await this.collection.countDocuments();
+    }
+
+    async getLastCommentId(idGiven){
+
+        idGiven = parseInt(idGiven, 10);
+
+        const pipeline = [ 
+            {
+                $match: {id: idGiven}
+            }, 
+            {
+                $project: 
+                    {count:
+                        {$cond: {if: {$isArray: "$comments"}, then: 
+                            {$size: "$comments" }, 
+                                else: -1} 
+                            }
+                        }
+                    } 
+        ]
+
+        return await this.collection.aggregate(pipeline).toArray();
     }
 };
 

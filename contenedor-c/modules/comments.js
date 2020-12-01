@@ -9,6 +9,8 @@ module.exports = async id => {
 	// filter API data
 	let data = [];
 	comments.forEach(c => {
+		if(!c.author.mainPicture) return;
+
 		data.push({
 			created:			c.created,
 			message:			c.message,
