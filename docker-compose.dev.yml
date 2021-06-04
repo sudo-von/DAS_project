@@ -1,0 +1,77 @@
+version: '3.3'
+services:
+  database:
+    container_name: dev_das_database
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DB}
+    volumes:
+      - ./mongo/volume:/data/db
+    ports:
+      - 27017:27017
+  database_manager:
+    container_name: dev_das_database_manager
+    image: mongo-express:latest
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_SERVER: ${MONGO_HOSTNAME}
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
+      ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_USERNAME}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_PASSWORD}
+    ports:
+      - 8081:8081
+  scraper:
+    container_name: dev_das_scraper
+    build: 
+      context: ./scrapper/.
+      dockerfile: Dockerfile
+      args:
+        MONGO_USERNAME: ${MONGO_USERNAME}
+        MONGO_PASSWORD: ${MONGO_PASSWORD}
+        MONGO_HOSTNAME: ${MONGO_HOSTNAME}
+        MONGO_PORT: ${MONGO_PORT}
+        MONGO_DB: ${MONGO_DB} 
+    restart: 'on-failure:10'
+    depends_on:
+      - database
+  backend:
+    container_name: dev_das_backend
+    image: nodejs:latest
+    restart: unless-stopped
+    build:
+      context: ./backend/.
+      dockerfile: Dockerfile
+      args:
+        MONGO_USERNAME: ${MONGO_USERNAME}
+        MONGO_PASSWORD: ${MONGO_PASSWORD}
+        MONGO_HOSTNAME: ${MONGO_HOSTNAME}
+        MONGO_PORT: ${MONGO_PORT}
+        MONGO_DB: ${MONGO_DB} 
+    links:
+      - database
+    depends_on:
+      - database
+    ports:
+      - '1337:1337'
+  rabbitmq:
+    container_name: dev_das_rabbitmq
+    image: 'rabbitmq:3-management'
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+  frontend:
+    container_name: dev_das_frontend
+    build:
+      context: frontend/.
+      dockerfile: dev.Dockerfile
+    volumes:
+      - './frontend/:/app'
+    ports:
+      - 80:3000

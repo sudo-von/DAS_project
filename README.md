@@ -16,7 +16,7 @@ Angel Santiago Jaime Zavala.
 - Docker
 - DockerCompose
 
-![MERN](screenshots/mern.jpg)
+![MERN](assets/mern.jpg)
 
 ## Tecnologías
 Para el desarrollo principal de este proyecto utilizamos el MERN STACK:
@@ -48,7 +48,7 @@ Lleva el nombre de *"rabbitmq"*
 un sitio web generado con el build de ReactJS.
 Lleva el nombre de *"apache"*
 
-![Terminal](screenshots/terminal.png)
+![Terminal](assets/terminal.png)
 
 ## Instrucciones para correr los contenedores
 1. Clonar el repositorio.
@@ -76,31 +76,31 @@ Lleva el nombre de *"apache"*
 Este servicio se basa en mostrarte un conjunto de canciones permitiendo ver los comentarios que otra gente haya registrado, ver la letra de la canción (siempre y cuando estos datos estén disponibles) y reproducir el vídeo, 
 además de mostrarte información relacionada a la misma.
 
-![ReactJS](screenshots/react_1.png)
+![ReactJS](assets/react_1.png)
 
 También podrás registrar tus propias canciones, por defecto el formulario ya cuenta con información
 base para que la demostración sea más rápida.
 
-![ReactJS](screenshots/react_2.png)
+![ReactJS](assets/react_2.png)
 
-![ReactJS](screenshots/react_3.png)
+![ReactJS](assets/react_3.png)
 
 Para comprobar que tu canción se ha registrado con éxito sólo debes volver a la categoría playlist y ver 
 la última canción que se ha insertado en el panel inferior.
 
-![ReactJS](screenshots/react_4.png)
+![ReactJS](assets/react_4.png)
 
 Además contamos con dos secciones extra, la categoría de destacados y la de más puntuadas.
 
-![ReactJS](screenshots/react_5.png)
+![ReactJS](assets/react_5.png)
 
 Si la canción cuenta con su letra también podrás verla (siempre y cuando sepas japonés).
 
-![ReactJS](screenshots/react_6.png)
+![ReactJS](assets/react_6.png)
 
 Del mismo modo que si la canción cuenta con comentarios podrás leerlos.
 
-![ReactJS](screenshots/react_7.png)
+![ReactJS](assets/react_7.png)
 
 En caso de querer probar el botón de letra o comentarios tendrás
 que tener en cuenta que no todas las canciones tienen esta información ya que se basa en su popularidad.
@@ -109,11 +109,11 @@ Como recomendación personal te sugiero entrar a la categoría de más puntuadas
 
 Cuenta con letras.
 
-![ReactJS](screenshots/react_8.png)
+![ReactJS](assets/react_8.png)
 
 Cuenta con comentarios.
 
-![ReactJS](screenshots/react_9.png)
+![ReactJS](assets/react_9.png)
 
 ## Diagramas de Arquitectura
 Para poder generar nuestro diagrama de arquitectura utilizamos la herramienta de [mingrammer](https://diagrams.mingrammer.com/)
@@ -125,8 +125,8 @@ El script llamado diagramas.py  de la carpeta diagramas se encarga de generar el
 Mientras que para generar nuestro diagrama de base de datos usamos una herramienta online.
 Estos archivos los podras encontrar en la carpeta llamada  <code>diagramas</code>.
 
-![Diagrama de microservicios](diagramas/diagrama_arquitectura.png)
-![Diagrama de la base de datos](diagramas/diagrama_bd.jpeg)
+![Diagrama de microservicios](assets/diagrams/diagrama_arquitectura.png)
+![Diagrama de la base de datos](assets/diagrams/diagrama_bd.jpeg)
 
 ## Extras
 En la carpeta <code>contenedor-f</code> encontrarás otro README con detalles técnicos de ReactJS.

@@ -6,7 +6,6 @@ const MONGO_HOSTNAME	= process.env.MONGO_HOSTNAME;
 const MONGO_PORT		= process.env.MONGO_PORT;
 const MONGO_DATABASE	= process.env.MONGO_DB;
 const MONGO_COLLECTION	= "songs";
-
 class ISave {
 	constructor() { }
 

@@ -1,0 +1,15 @@
+FROM node:latest
+
+# Environment variables passed as args.
+ENV MONGO_USERNAME $MONGO_USERNAME
+ENV MONGO_PASSWORD $MONGO_PASSWORD
+ENV MONGO_HOSTNAME $MONGO_HOSTNAME
+ENV MONGO_PORT $MONGO_PORT
+ENV MONGO_DB $MONGO_DB
+
+RUN mkdir /src
+WORKDIR /src
+ADD . ./
+RUN npm install
+EXPOSE 1337
+CMD [ "node", "index.js" ]
